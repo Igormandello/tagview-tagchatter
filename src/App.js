@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import APIFecher from './js/APIFetcher';
 import logo from './imgs/logo.png';
 import './css/App.css';
@@ -12,18 +13,18 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <aside class="sidebar">
-          <div class="sidebar__logo">
+        <aside className="sidebar">
+          <div className="sidebar__logo">
             <img src={logo} alt="logo"/>
           </div>
         </aside>
 
-        <div class="content">
-          <header class="header">
-            <h1 class="header__title">#tagchatter</h1>
+        <div className="content">
+          <header className="header">
+            <h1 className="header__title">#tagchatter</h1>
 
-            <div class="header__parrots-count">
-              <span class="header__title" id="parrots-counter">-</span>
+            <div className="header__parrots-count">
+              <span className="header__title" id="parrots-counter">-</span>
             </div>
           </header>
         </div>
@@ -31,5 +32,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  apiUrl: PropTypes.string.isRequired
+};
 
 export default App;
