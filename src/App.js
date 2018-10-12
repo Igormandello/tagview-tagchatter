@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import APIFecher from './js/APIFetcher';
+import logo from './imgs/logo.png';
+import './css/App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    APIFecher(props.apiUrl);
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="app">
+        <aside class="sidebar">
+          <div class="sidebar__logo">
+            <img src={logo} alt="logo"/>
+          </div>
+        </aside>
+
+        <div class="content">
+          <header class="header">
+            <h1 class="header__title">#tagchatter</h1>
+
+            <div class="header__parrots-count">
+              <span class="header__title" id="parrots-counter">-</span>
+            </div>
+          </header>
+        </div>
       </div>
     );
   }
