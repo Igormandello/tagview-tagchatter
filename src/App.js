@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import PropTypes from 'prop-types';
 import APIFecher from './js/APIFetcher';
 import MessageBox from './components/MessageBox';
@@ -6,6 +7,7 @@ import MessageBox from './components/MessageBox';
 import logo from './imgs/logo.png';
 import send from './imgs/send.svg';
 
+import 'react-notifications/lib/notifications.css';
 import './css/App.css';
 
 class App extends Component {
@@ -105,6 +107,7 @@ class App extends Component {
             </div>
           </header>
           <div className="messages-section">
+            <NotificationContainer/>
             {this.state.messages}
           </div>
           <footer>

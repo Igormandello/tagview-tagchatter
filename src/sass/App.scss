@@ -35,6 +35,11 @@ body, .wrapper {
   flex-direction: column;
   flex: 1;
 
+  .notification-container {
+    margin-top: 90px;
+    overflow: hidden;
+  }
+
   .user-picture {
     min-width: 34px;
     height: 34px;
