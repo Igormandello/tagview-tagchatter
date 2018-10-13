@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import APIFecher from './js/APIFetcher';
 import logo from './imgs/logo.png';
+import send from './imgs/send.svg';
 import './css/App.css';
 
 class App extends Component {
@@ -29,7 +30,9 @@ class App extends Component {
           </header>
           <div className="messages-section">
             <div className="message-box">
-              <img className="user-picture"/>
+              <div className="user-picture">
+                <img alt="user"/>
+              </div>
               <div className="message">
                 <div className="info">
                   <span className="user-name">us3r</span>
@@ -43,10 +46,11 @@ class App extends Component {
             </div>
           </div>
           <footer>
-            <img className="user-picture" alt="user"/>
+            <div className="user-picture">
+              <img alt="user"/>
+            </div>
             <input className="message-input"/>
-            <button className="send-message">
-            </button>
+            <img className="send-message" src={send} alt=""/>
           </footer>
         </div>
       </div>
