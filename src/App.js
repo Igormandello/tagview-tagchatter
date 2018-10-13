@@ -14,6 +14,7 @@ class App extends Component {
   constructor (props) {
     super(props);
 
+    this.requesting = 0;
     this.fetcher = new APIFecher(this.props.apiUrl);
     this.state = {
       parrots: '-',
@@ -45,7 +46,8 @@ class App extends Component {
   }
 
   async updateMessages() {
-    let parrots = await this.fetcher.fetchParrotsCount(),
+    console.log(this.requesting);
+    let parrots = await this.fetcher.fetchParrotsCount() + this.requesting,
         messages = await this.fetcher.listMessages();
 
     this.setState(prev => {
@@ -73,12 +75,19 @@ class App extends Component {
   }
 
   toggleParrotWrapper(messageId, hasParrot) {
+    //If a parrot / unparrot is being requested at the same time from an updateMessages, 
+    //the parrot count will be wrong for another 3 seconds, if we save the pending difference, 
+    //the wrong counter will be corrected
+    this.requesting += hasParrot ? 1 : -1;
+
     this.fetcher.changeParrotMessage(messageId, hasParrot).then(() => {
       this.setState(prev => {
         return {
           ...prev,
           parrots: prev.parrots + (hasParrot ? 1 : -1)
         }
+      }, () => {
+        this.requesting -= hasParrot ? 1 : -1;
       });
     });
   }
