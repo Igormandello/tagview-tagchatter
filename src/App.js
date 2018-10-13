@@ -9,11 +9,26 @@ import send from './imgs/send.svg';
 import './css/App.css';
 
 class App extends Component {
-  async componentDidMount() {
-    let fetcher = new APIFecher(this.props.apiUrl);
+  constructor (props) {
+    super(props);
 
-    let counter = document.querySelector('#parrots-counter');
-    counter.innerHTML = await fetcher.fetchParrotsCount();
+    this.fetcher = new APIFecher(this.props.apiUrl);
+    this.state = {
+      parrots: '-',
+      user: {}
+    };
+  }
+
+  async componentWillMount() {
+    let parrots = await this.fetcher.fetchParrotsCount(),
+        user = await this.fetcher.getMe();
+
+    this.setState(() => {
+      return {
+        parrots,
+        user
+      }
+    });
   }
 
   render() {
@@ -30,7 +45,7 @@ class App extends Component {
             <h1 className="title">#tagchatter</h1>
 
             <div className="parrots-count">
-              <span className="title" id="parrots-counter">-</span>
+              <span className="title" id="parrots-counter">{this.state.parrots}</span>
             </div>
           </header>
           <div className="messages-section">
@@ -47,7 +62,7 @@ class App extends Component {
           </div>
           <footer>
             <div className="user-picture">
-              <img alt="user"/>
+              <img src={this.state.user.avatar} alt=""/>
             </div>
             <input className="message-input"/>
             <img className="send-message" src={send} alt=""/>

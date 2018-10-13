@@ -35,7 +35,7 @@ class MessageBox extends Component {
     return (
       <div className={'message-box' + (this.state.parrot ? ' active' : '')}>
         <div className="user-picture">
-          <img src={this.props.avatar} alt="user" />
+          <img src={this.props.avatar} alt="" />
         </div>
         <div className="message">
           <div className="info">

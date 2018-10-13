@@ -1,6 +1,6 @@
 function APIFetcher(apiUrl) {
-  this.fetchParrotsCount = function(counter) {
-    return fetch(apiUrl + "/messages/parrots-count")
+  this.fetchParrotsCount = function() {
+    return fetch(apiUrl + '/messages/parrots-count')
       .then(function(response) {
         return response.json();
       });
@@ -24,8 +24,10 @@ function APIFetcher(apiUrl) {
   }
 
   this.getMe = function() {
-    // Faz um request para pegar os dados do usuário atual
-    // Exibe a foto do usuário atual na tela e armazena o seu ID para quando ele enviar uma mensagem
+    return fetch(apiUrl + '/me')
+      .then(function(response) {
+        return response.json();
+      });
   }
 }
 

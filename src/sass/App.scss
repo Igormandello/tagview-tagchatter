@@ -36,12 +36,13 @@ body, .wrapper {
   flex: 1;
 
   .user-picture {
-    width: 34px;
+    min-width: 34px;
     height: 34px;
     border-radius: 25%;
     background-color: #979797;
 
     img {
+      display: block;
       height: 100%;
       border-radius: inherit;
       object-fit: cover;
