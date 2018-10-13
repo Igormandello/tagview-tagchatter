@@ -32,7 +32,15 @@ class App extends Component {
             </div>
           </header>
           <div className="messages-section">
-            <MessageBox />
+            <MessageBox 
+              username="Hackernews"
+              hour={new Date('2017-10-17T12:09:07.997Z')}
+              message="Lorem ipsum dolor sit amet consectetur, adipisicing 
+                elit. Quis aperiam praesentium nostrum doloribus fugiat 
+                illum, mollitia fugit assumenda vitae commodi velit 
+                perferendis voluptas ipsam distinctio eveniet blanditiis 
+                atque est accusamus."
+            />
           </div>
           <footer>
             <div className="user-picture">

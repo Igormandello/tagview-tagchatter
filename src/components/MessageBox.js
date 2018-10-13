@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../css/MessageBox.css';
 
 class MessageBox extends Component {
@@ -6,7 +7,7 @@ class MessageBox extends Component {
     super(props);
 
     this.state = {
-      parrot: false
+      parrot: props.parrot ? true : false
     }
   }
 
@@ -18,6 +19,18 @@ class MessageBox extends Component {
     })
   }
 
+  formatHour(hour) {
+    let h = hour.getHours();
+    if (h < 10)
+      h = '0' + h;
+
+    let m = hour.getMinutes();
+    if (m < 10)
+      m = '0' + m;
+
+    return h + ':' + m;
+  }
+
   render() {
     return (
       <div className={'message-box' + (this.state.parrot ? ' active' : '')}>
@@ -26,20 +39,24 @@ class MessageBox extends Component {
         </div>
         <div className="message">
           <div className="info">
-            <span className="user-name">us3r</span>
-            <span className="hour">12:09</span>
+            <span className="user-name">{this.props.username}</span>
+            <span className="hour">{this.formatHour(this.props.hour)}</span>
             <span className="parrot" onClick={this.toggleParrot}></span>
           </div>
           <p className="message-content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore,
-            voluptatibus maiores eaque placeat dolorum incidunt. Quod non,
-            architecto tempora nesciunt ipsum assumenda ex, corporis laboriosam
-            facilis dicta aliquam quas. Reprehenderit.
+            {this.props.message}
           </p>
         </div>
       </div>
     );
     }
+}
+
+MessageBox.propTypes = {
+  username: PropTypes.string.isRequired,
+  hour: PropTypes.instanceOf(Date).isRequired,
+  parrot: PropTypes.bool,
+  message: PropTypes.string.isRequired
 }
 
 export default MessageBox;
