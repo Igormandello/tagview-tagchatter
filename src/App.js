@@ -20,6 +20,7 @@ class App extends Component {
     };
 
     this.toggleParrotWrapper = this.toggleParrotWrapper.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
     this.updateMessages = this.updateMessages.bind(this);
     setInterval(this.updateMessages, 3000);
   }
@@ -77,6 +78,12 @@ class App extends Component {
     });
   }
 
+  sendMessage() {
+    this.fetcher.sendMessage(document.querySelector('#message').value, this.state.user.id).then(() => {
+      this.updateMessages();
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -101,8 +108,8 @@ class App extends Component {
             <div className="user-picture">
               <img src={this.state.user.avatar} alt=""/>
             </div>
-            <input className="message-input"/>
-            <img className="send-message" src={send} alt=""/>
+            <input id="message" className="message-input"/>
+            <img className="send-message" src={send} alt="" onClick={this.sendMessage}/>
           </footer>
         </div>
       </div>

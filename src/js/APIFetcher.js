@@ -25,10 +25,19 @@ function APIFetcher(apiUrl) {
       });
   }
 
-  this.sendMessage = function(message, authorId) {
-    // Manda a mensagem para a API quando o usuário envia a mensagem
-    // Caso o request falhe exibe uma mensagem para o usuário utilizando Window.alert ou outro componente visual
-    // Se o request for bem sucedido, atualiza o conteúdo da lista de mensagens
+  this.sendMessage = function(message, author_id) {
+    return fetch(apiUrl + '/messages', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message,
+        author_id,
+        stable: true
+      })
+    });
   }
 
   this.getMe = function() {
