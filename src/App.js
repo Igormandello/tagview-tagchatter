@@ -40,7 +40,10 @@ class App extends Component {
                   <span className="parrot"></span>
                 </div>
                 <p className="message-content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, 
+                  voluptatibus maiores eaque placeat dolorum incidunt. Quod non, 
+                  architecto tempora nesciunt ipsum assumenda ex, corporis laboriosam 
+                  facilis dicta aliquam quas. Reprehenderit.
                 </p>
               </div>
             </div>
