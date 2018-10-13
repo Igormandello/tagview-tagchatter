@@ -34,6 +34,7 @@ class App extends Component {
           <div className="messages-section">
             <MessageBox 
               username="Hackernews"
+              avatar="https://robohash.org/bgset_any/size_100x100/ulises.rath.png"
               hour={new Date('2017-10-17T12:09:07.997Z')}
               message="Lorem ipsum dolor sit amet consectetur, adipisicing 
                 elit. Quis aperiam praesentium nostrum doloribus fugiat 

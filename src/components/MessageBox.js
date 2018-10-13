@@ -35,7 +35,7 @@ class MessageBox extends Component {
     return (
       <div className={'message-box' + (this.state.parrot ? ' active' : '')}>
         <div className="user-picture">
-          <img alt="user" />
+          <img src={this.props.avatar} alt="user" />
         </div>
         <div className="message">
           <div className="info">
@@ -54,6 +54,7 @@ class MessageBox extends Component {
 
 MessageBox.propTypes = {
   username: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
   hour: PropTypes.instanceOf(Date).isRequired,
   parrot: PropTypes.bool,
   message: PropTypes.string.isRequired
