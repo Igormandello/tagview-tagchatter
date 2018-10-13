@@ -34,8 +34,7 @@ function APIFetcher(apiUrl) {
       },
       body: JSON.stringify({
         message,
-        author_id,
-        stable: true
+        author_id
       })
     });
   }

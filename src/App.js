@@ -84,9 +84,20 @@ class App extends Component {
   }
 
   sendMessage() {
-    this.fetcher.sendMessage(document.querySelector('#message').value, this.state.user.id).then(() => {
-      this.updateMessages();
-    });
+    let input = document.querySelector('#message'),
+        content = input.value.trim();
+
+    if (content === '')
+      NotificationManager.error('A mensagem está vazia!', 'Erro', 3000);
+    else
+      this.fetcher.sendMessage(input.value.trim(), this.state.user.id).then(response => {
+        if (response.status === 500)
+          NotificationManager.error('Não foi possível enviar a mensagem!', 'Erro', 3000);
+        else {
+          input.value = '';
+          this.updateMessages();
+        }
+      });
   }
 
   render() {
