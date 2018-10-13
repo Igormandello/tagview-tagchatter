@@ -9,9 +9,11 @@ import send from './imgs/send.svg';
 import './css/App.css';
 
 class App extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     let fetcher = new APIFecher(this.props.apiUrl);
-    fetcher.fetchParrotsCount(document.querySelector('#parrots-counter'));
+
+    let counter = document.querySelector('#parrots-counter');
+    counter.innerHTML = await fetcher.fetchParrotsCount();
   }
 
   render() {

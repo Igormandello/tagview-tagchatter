@@ -3,9 +3,6 @@ function APIFetcher(apiUrl) {
     return fetch(apiUrl + "/messages/parrots-count")
       .then(function(response) {
         return response.json();
-      })
-      .then(function(count) {
-        counter.innerHTML = count;
       });
   }
 
