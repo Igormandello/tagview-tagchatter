@@ -19,7 +19,7 @@ class App extends Component {
       messages: []
     };
 
-    setInterval(this.updateMessages, 3000);
+    setInterval(this.updateMessages.bind(this), 3000);
   }
 
   async componentWillMount() {
@@ -27,29 +27,35 @@ class App extends Component {
         user = await this.fetcher.getMe(),
         messages = await this.fetcher.listMessages();
 
-    let messageBoxes = [];
-    messages.forEach(message => {
-      messageBoxes.push(
-        <MessageBox
-          key={message.id}
-          username={message.author.name}
-          avatar={message.author.avatar}
-          hour={new Date('2017-10-17T12:09:07.997Z')}
-          message={message.content}
-        />
-      );
-    });
-
     this.setState(() => {
       return {
         parrots,
         user,
-        messages: messageBoxes
+        messages: this.createMessageBoxes(messages)
       }
     });
   }
 
-  updateMessages() {
+  async updateMessages() {
+    let messages = await this.fetcher.listMessages();
+    this.setState(prev => {
+      return {
+        ...prev,
+        messages: this.createMessageBoxes(messages)
+      }
+    });
+  }
+
+  createMessageBoxes(messages) {
+    return messages.map(message =>
+      <MessageBox
+        key={message.id}
+        username={message.author.name}
+        avatar={message.author.avatar}
+        hour={new Date(message.created_at)}
+        message={message.content}
+      />
+    );
   }
 
   render() {
