@@ -7,9 +7,10 @@ function APIFetcher(apiUrl) {
   }
 
   this.listMessages = function() {
-    // Faz um request para a API de listagem de mensagens
-    // Atualiza a o conteúdo da lista de mensagens
-    // Deve ser chamado a cada 3 segundos
+    return fetch(apiUrl + '/messages')
+      .then(function(response) {
+        return response.json();
+      });
   }
 
   this.parrotMessage = function(messageId) {

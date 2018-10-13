@@ -15,20 +15,41 @@ class App extends Component {
     this.fetcher = new APIFecher(this.props.apiUrl);
     this.state = {
       parrots: '-',
-      user: {}
+      user: {},
+      messages: []
     };
+
+    setInterval(this.updateMessages, 3000);
   }
 
   async componentWillMount() {
     let parrots = await this.fetcher.fetchParrotsCount(),
-        user = await this.fetcher.getMe();
+        user = await this.fetcher.getMe(),
+        messages = await this.fetcher.listMessages();
+
+    let messageBoxes = [];
+    messages.forEach(message => {
+      messageBoxes.push(
+        <MessageBox
+          key={message.id}
+          username={message.author.name}
+          avatar={message.author.avatar}
+          hour={new Date('2017-10-17T12:09:07.997Z')}
+          message={message.content}
+        />
+      );
+    });
 
     this.setState(() => {
       return {
         parrots,
-        user
+        user,
+        messages: messageBoxes
       }
     });
+  }
+
+  updateMessages() {
   }
 
   render() {
@@ -49,16 +70,7 @@ class App extends Component {
             </div>
           </header>
           <div className="messages-section">
-            <MessageBox 
-              username="Hackernews"
-              avatar="https://robohash.org/bgset_any/size_100x100/ulises.rath.png"
-              hour={new Date('2017-10-17T12:09:07.997Z')}
-              message="Lorem ipsum dolor sit amet consectetur, adipisicing 
-                elit. Quis aperiam praesentium nostrum doloribus fugiat 
-                illum, mollitia fugit assumenda vitae commodi velit 
-                perferendis voluptas ipsam distinctio eveniet blanditiis 
-                atque est accusamus."
-            />
+            {this.state.messages}
           </div>
           <footer>
             <div className="user-picture">
