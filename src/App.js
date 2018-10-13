@@ -19,7 +19,9 @@ class App extends Component {
       messages: []
     };
 
-    setInterval(this.updateMessages.bind(this), 3000);
+    this.toggleParrotWrapper = this.toggleParrotWrapper.bind(this);
+    this.updateMessages = this.updateMessages.bind(this);
+    setInterval(this.updateMessages, 3000);
   }
 
   async componentWillMount() {
@@ -37,10 +39,13 @@ class App extends Component {
   }
 
   async updateMessages() {
-    let messages = await this.fetcher.listMessages();
+    let parrots = await this.fetcher.fetchParrotsCount(),
+        messages = await this.fetcher.listMessages();
+
     this.setState(prev => {
       return {
         ...prev,
+        parrots,
         messages: this.createMessageBoxes(messages)
       }
     });
@@ -50,12 +55,26 @@ class App extends Component {
     return messages.map(message =>
       <MessageBox
         key={message.id}
+        id={message.id}
         username={message.author.name}
         avatar={message.author.avatar}
         hour={new Date(message.created_at)}
         message={message.content}
+        parrot={message.has_parrot}
+        toggleParrot={this.toggleParrotWrapper}
       />
     );
+  }
+
+  toggleParrotWrapper(messageId, hasParrot) {
+    this.fetcher.changeParrotMessage(messageId, hasParrot).then(() => {
+      this.setState(prev => {
+        return {
+          ...prev,
+          parrots: prev.parrots + (hasParrot ? 1 : -1)
+        }
+      });
+    });
   }
 
   render() {

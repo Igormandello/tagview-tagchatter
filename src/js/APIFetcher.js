@@ -13,9 +13,16 @@ function APIFetcher(apiUrl) {
       });
   }
 
-  this.parrotMessage = function(messageId) {
-    // Faz um request para marcar a mensagem como parrot no servidor
-    // Altera a mensagem na lista para que ela apareça como parrot na interface
+  this.changeParrotMessage = function(messageId, hasParrot) {
+    let partialUrl = apiUrl + '/messages/' + messageId;
+    if (hasParrot)
+      return fetch(partialUrl + '/parrot', {
+        method: 'PUT'
+      });
+    else
+      return fetch(partialUrl + '/unparrot', {
+        method: 'PUT'
+      });
   }
 
   this.sendMessage = function(message, authorId) {

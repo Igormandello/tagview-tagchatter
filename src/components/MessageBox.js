@@ -12,6 +12,8 @@ class MessageBox extends Component {
   }
 
   toggleParrot = () => {
+    this.props.toggleParrot(this.props.id, !this.state.parrot);
+
     this.setState((prev) => {
       return {
         parrot: !prev.parrot
@@ -53,11 +55,13 @@ class MessageBox extends Component {
 }
 
 MessageBox.propTypes = {
+  id: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   hour: PropTypes.instanceOf(Date).isRequired,
   parrot: PropTypes.bool,
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
+  toggleParrot: PropTypes.func.isRequired
 }
 
 export default MessageBox;
