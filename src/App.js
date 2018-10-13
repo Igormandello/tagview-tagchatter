@@ -36,6 +36,9 @@ class App extends Component {
         user,
         messages: this.createMessageBoxes(messages)
       }
+    }, () => {
+      let messagesSection = document.querySelector('.messages-section');
+      messagesSection.scrollTop = messagesSection.scrollHeight;
     });
   }
 
