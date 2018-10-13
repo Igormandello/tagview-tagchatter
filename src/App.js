@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import APIFecher from './js/APIFetcher';
+import MessageBox from './components/MessageBox';
+
 import logo from './imgs/logo.png';
 import send from './imgs/send.svg';
+
 import './css/App.css';
 
 class App extends Component {
@@ -29,24 +32,7 @@ class App extends Component {
             </div>
           </header>
           <div className="messages-section">
-            <div className="message-box">
-              <div className="user-picture">
-                <img alt="user"/>
-              </div>
-              <div className="message">
-                <div className="info">
-                  <span className="user-name">us3r</span>
-                  <span className="hour">12:09</span>
-                  <span className="parrot"></span>
-                </div>
-                <p className="message-content">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, 
-                  voluptatibus maiores eaque placeat dolorum incidunt. Quod non, 
-                  architecto tempora nesciunt ipsum assumenda ex, corporis laboriosam 
-                  facilis dicta aliquam quas. Reprehenderit.
-                </p>
-              </div>
-            </div>
+            <MessageBox />
           </div>
           <footer>
             <div className="user-picture">
