@@ -35,6 +35,52 @@ body, .wrapper {
   flex-direction: column;
   flex: 1;
 
+  .loader {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+
+    .rotating-circle {
+      display: inline-flex;
+      width: inherit;
+      height: inherit;
+      animation: rotate 1s infinite linear;
+
+      & > div {
+        position: relative;
+        width: 50%;
+        height: inherit;
+        overflow: hidden;
+        
+        & > div {
+          position: absolute;
+          border: 3px solid;
+          border-radius: 50%;
+          border-color: transparent;
+          width: 200%;
+          left: 0;
+          right: 0;
+          height: inherit;
+        }
+
+        &.circle-left > div {
+          border-left-color: #25272E;
+          transform: rotate(60deg);
+
+          animation: rotation-left 1.5s infinite ease-in-out;
+        }
+
+        &.circle-right > div {
+          border-right-color: #25272E;
+          transform: rotate(-60deg);
+          left: -100%;
+
+          animation: rotation-right 1.5s infinite ease-in-out;
+        }
+      }
+    }
+  }
+
   .notification-container {
     margin-top: 90px;
     overflow: hidden;
@@ -123,4 +169,21 @@ body, .wrapper {
       }
     }
   }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotation-left {
+  0% { transform: rotate(110deg); }
+  50% { transform: rotate(45deg); }
+  100% { transform: rotate(110deg); }
+}
+
+@keyframes rotation-right {
+  0% { transform: rotate(-110deg); }
+  50% { transform: rotate(-45deg); }
+  100% { transform: rotate(-110deg); }
 }

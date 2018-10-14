@@ -19,7 +19,7 @@ class App extends Component {
     this.state = {
       parrots: '-',
       user: {},
-      messages: []
+      messages: null
     };
 
     this.toggleParrotWrapper = this.toggleParrotWrapper.bind(this);
@@ -46,9 +46,11 @@ class App extends Component {
   }
 
   async updateMessages() {
-    console.log(this.requesting);
     let parrots = await this.fetcher.fetchParrotsCount() + this.requesting,
         messages = await this.fetcher.listMessages();
+
+    let messagesSection = document.querySelector('.messages-section');
+    let isOnBottom = messagesSection.scrollTop === messagesSection.scrollHeight - messagesSection.clientHeight;
 
     this.setState(prev => {
       return {
@@ -56,6 +58,9 @@ class App extends Component {
         parrots,
         messages: this.createMessageBoxes(messages)
       }
+    }, () => {
+      if (isOnBottom)
+        messagesSection.scrollTop = messagesSection.scrollHeight;
     });
   }
 
@@ -128,6 +133,19 @@ class App extends Component {
           </header>
           <div className="messages-section">
             <NotificationContainer/>
+            {
+              !this.state.messages &&
+              <div className="loader">
+                <div className="rotating-circle">
+                  <div className="circle-left">
+                    <div />
+                  </div>
+                  <div className="circle-right">
+                    <div />
+                  </div>
+                </div>
+              </div>
+            }
             {this.state.messages}
           </div>
           <footer>
