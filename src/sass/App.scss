@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Lato');
 
+$header-height: 82px;
+$footer-height: 100px;
+
 html {
   height: 100%;
 }
@@ -91,6 +94,7 @@ body, .wrapper {
     height: 34px;
     border-radius: 25%;
     background-color: #979797;
+    overflow: hidden;
 
     img {
       display: block;
@@ -102,7 +106,7 @@ body, .wrapper {
   }
 
   header {
-    height: 82px;
+    height: $header-height;
     border-bottom: 1px solid #EEEEEE;
     padding: 16px 22px;
     color: #626262;
@@ -129,13 +133,14 @@ body, .wrapper {
 
   .messages-section {
     flex-grow: 1;
-    padding: 18px 0;
-    overflow: auto;
+    padding-top: 18px;
+    overflow-y: auto;
+    max-height: calc(100vh - #{$header-height + $footer-height});
   }
 
   footer {
     display: inline-flex;
-    height: 100px;
+    height: $footer-height;
     background-color: #EFEFEF;
     padding: 24px;
 
@@ -148,6 +153,7 @@ body, .wrapper {
       flex-grow: 1;
       border-radius: 6px;
       border: none;
+      outline: none;
       background: rgba(255, 255, 255, 0.5);
 
       margin: 0 24px;

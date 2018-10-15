@@ -42,6 +42,10 @@
         height: 20px;
         background: url('../imgs/parrot.png');
         background-size: 28px 20px;
+
+        &:hover {
+          background-image: url('../imgs/parrot.gif');
+        }
       }
     }
 
