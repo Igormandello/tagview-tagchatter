@@ -3,6 +3,22 @@
 $header-height: 82px;
 $footer-height: 100px;
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #393939; 
+}
+
 html {
   height: 100%;
 }
